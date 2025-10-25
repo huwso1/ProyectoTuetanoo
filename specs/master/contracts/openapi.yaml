@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Licitaciones Inteligentes API
+  version: 0.1.0
+paths:
+  /auth/login:
+    post:
+      summary: Login user
+      requestBody:
+        required: true
+      responses:
+        '200':
+          description: token
+  /search:
+    get:
+      summary: Search SECOP aggregated results
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+      responses:
+        '200':
+          description: list of results with score
+  /score:
+    post:
+      summary: Compute compatibility score for company vs pliego
+      requestBody:
+        required: true
+      responses:
+        '200':
+          description: score and gaps
+  /documents/upload:
+    post:
+      summary: Upload document (RUP, DID, other)
+      requestBody:
+        required: true
+      responses:
+        '201':
+          description: uploaded
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
